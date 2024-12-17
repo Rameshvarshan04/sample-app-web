@@ -1,25 +1,26 @@
 pipeline {
     agent any
 
-    tools {Node "12.6"}
+    tools {nodejs('Node')
+          }
 
     stages {
 
         stage('Install dependencies') {
             steps {
-                sh "npm install"
+                sh 'npm install'
             }
         }
 
         stage('Build application') {
             steps {
-            	sh "npm start & npx wait-on --timeout 60000 http://localhost:3000 &"
+            	sh 'npm start & npx wait-on --timeout 60000 http://localhost:3000 &'
             }
         }
 
         stage('Run Functional Tests') {
             steps {
-              sh "npm run test.e2e.sauce.eu ${env.CLI_ARGS}"
+              sh 'npm run test.e2e.sauce.eu ${env.CLI_ARGS}'
             }
         }
     }
