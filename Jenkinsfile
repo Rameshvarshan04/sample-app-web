@@ -14,7 +14,7 @@ pipeline {
 
         stage('Build application') {
             steps {
-            	sh 'npm start & npx wait-on --timeout 60000 http://localhost:3000 &'
+            	sh 'npm start '
             }
         }
 
